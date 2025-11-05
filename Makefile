@@ -1,23 +1,23 @@
 init:
-	python -m pip install --upgrade pip
-	pip install -e .[dev]
-	pre-commit install
+	@command -v uv >/dev/null 2>&1 || { echo "uv is not installed. Installing uv..."; curl -LsSf https://astral.sh/uv/install.sh | sh; }
+	uv pip install -e .[dev]
+	uv run pre-commit install
 
 lint:
-	ruff check .
-	black --check .
-	mypy src
+	uv run ruff check .
+	uv run black --check .
+	uv run mypy src
 
 format:
-	ruff check --fix .
-	black .
+	uv run ruff check --fix .
+	uv run black .
 
 test:
-	pytest
+	uv run pytest
 
 build:
-	python -m build
+	uv build
 
 publish:
-	twine upload dist/*
+	uvx twine upload dist/*
 

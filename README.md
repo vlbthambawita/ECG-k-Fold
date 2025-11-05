@@ -13,9 +13,17 @@ For development:
 ```bash
 git clone <this-repo>
 cd ECG-k-Fold
-python -m pip install --upgrade pip
-pip install -e .[dev]
-pre-commit install
+make init
+```
+
+Or manually:
+
+```bash
+git clone <this-repo>
+cd ECG-k-Fold
+# Install uv if not already installed: curl -LsSf https://astral.sh/uv/install.sh | sh
+uv pip install -e .[dev]
+uv run pre-commit install
 ```
 
 ## CLI
