@@ -1,0 +1,40 @@
+name: Push dataset to Hugging Face
+
+on:
+  workflow_dispatch:
+    inputs:
+      local_path:
+        description: 'Local dataset directory path'
+        required: true
+        type: string
+      repo_id:
+        description: 'Target HF dataset repo id (e.g. org/name)'
+        required: true
+        type: string
+      private:
+        description: 'Create private dataset'
+        default: true
+        type: boolean
+      commit_message:
+        description: 'Commit message'
+        default: 'Add/Update dataset'
+        type: string
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+      - name: Push dataset
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          ecg-k-fold push-dataset "${{ inputs.local_path }}" --repo-id "${{ inputs.repo_id }}" $([ "${{ inputs.private }}" = "true" ] && echo "--private" || echo "--public") --commit-message "${{ inputs.commit_message }}"
+
