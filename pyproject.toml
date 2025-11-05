@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
 authors = [
-  { name = "ECG-k-Fold Maintainers" }
+  { name = "Vajira Thambawita", email = "vlbthambawita@gmail.com"}
 ]
 keywords = ["ecg", "machine-learning", "kfold", "huggingface", "datasets"]
 classifiers = [
@@ -49,7 +49,7 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["ecg_k_fold*"]
+include = ["ecg_k_fold*", "ecg_k_fold.datasets*"]
 
 [tool.ruff]
 line-length = 100
