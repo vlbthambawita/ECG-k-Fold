@@ -3,7 +3,7 @@ __all__ = [
     "hello_world",
 ]
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 def hello_world(name: str = "World") -> str:
